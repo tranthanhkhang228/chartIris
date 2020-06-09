@@ -1,17 +1,12 @@
 import iris from './data.js';
-import {
-  getDataSetTwoCross,
-  drawCoordinateAxes,
-  drawChart
-} from './utility.js';
+import { drawChart, getDataSetTwoCross } from './utility.js';
 
-//  0,1 0,2 0,3 1,2 1,3 2,3
-const irisTwoCross = getDataSetTwoCross(iris, [2, 3]);
+const irisTwoCrossWithLabel = getDataSetTwoCross(iris, [3, 4]);
 let myCanvas = document.getElementById('my-canvas');
 let context = myCanvas.getContext('2d');
 
 const allProps = {
-  irisTwoCross: irisTwoCross,
+  irisTwoCross: irisTwoCrossWithLabel,
   context: context,
   Y_MAXIMUM: 1000,
   CLASSCOLORS: ['#f50212', '#02db23', '#1958f7'],
@@ -21,5 +16,5 @@ const allProps = {
   MARKPOINT_FONT_FAMILY: 'Calibri'
 };
 
-drawCoordinateAxes({ ...allProps });
+console.table(irisTwoCrossWithLabel);
 drawChart({ ...allProps });
