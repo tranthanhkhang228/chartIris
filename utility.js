@@ -1,14 +1,12 @@
 let setPointColor;
 let drawLine;
 let drawPoint;
-let context;
 
 let assignContextForDrawLine = (context) => (
   beginPoint = [0, 0],
   endPoint = [0, 0],
   strokeColor = 'black'
 ) => {
-  console.log('draw line');
   context.beginPath();
 
   context.moveTo(beginPoint[0], beginPoint[1]);
@@ -36,14 +34,14 @@ let assignContextForDrawPoint = (context) => (
   setPointColor(classColors[label - 1]);
 };
 
-let assignContext = (contextR) => {
-  context = contextR;
-  drawLine = assignContextForDrawLine(contextR);
-  setPointColor = assignContextForSetPointColor(contextR);
-  drawPoint = assignContextForDrawPoint(contextR);
+let assignContextForDrawMethods = (context) => {
+  drawLine = assignContextForDrawLine(context);
+  setPointColor = assignContextForSetPointColor(context);
+  drawPoint = assignContextForDrawPoint(context);
 };
 
 export let drawCoordinateAxes = (
+  context,
   yMaximum,
   strokeColor,
   markPointColor,
@@ -73,7 +71,7 @@ export let drawCoordinateAxes = (
   }
 };
 
-export let displayData = (data, yMaximum, classColors, markPointFontSize) => {
+export let showData = (data, yMaximum, classColors, markPointFontSize) => {
   data.forEach((instanceFeatures) => {
     drawPoint(...instanceFeatures, yMaximum, classColors, markPointFontSize);
   });
@@ -91,16 +89,17 @@ export let drawChart = (allProps = {}) => {
     MARKPOINT_FONT_FAMILY: markPointFontFamily
   } = allProps;
 
-  assignContext(context);
+  assignContextForDrawMethods(context);
 
   drawCoordinateAxes(
+    context,
     yMaximum,
     strokeColor,
     markPointColor,
     markPointFontSize,
     markPointFontFamily
   );
-  displayData(data, yMaximum, classColors, markPointFontSize);
+  showData(data, yMaximum, classColors, markPointFontSize);
 };
 
 export let getDataSetTwoCross = (dataset = [], retainedFeatures = [1, 2]) =>

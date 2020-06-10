@@ -16,5 +16,4 @@ const allProps = {
   MARKPOINT_FONT_FAMILY: 'Calibri'
 };
 
-console.table(irisTwoCrossWithLabel);
 drawChart({ ...allProps });
