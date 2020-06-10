@@ -12,3 +12,9 @@
 
   margin: 0 auto;
 }
+
+#change {
+  font-size: 20px;
+  width: 100px;
+  height: 100px;
+}
